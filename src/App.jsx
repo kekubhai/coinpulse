@@ -5,6 +5,8 @@ import { RefreshCw, TrendingUp, TrendingDown, DollarSign, BarChart2 } from 'luci
 import { Card ,CardContent,CardDescription,CardFooter,CardHeader,CardTitle} from './components/ui/card';
 import { Alert,AlertDescription,AlertTitle } from './components/ui/alert';
 import StarrySky from './components/shinestar';
+import Component from './footer';
+import AnimatedFooter from './footer';
 const CryptoDashboard = () => {
   const [priceData, setPriceData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,11 +64,7 @@ const CryptoDashboard = () => {
     const isPositiveChange = parseFloat(stats.change) >= 0;
 
     return (
-
-
-      
-
-      <><div className="absolute  top-0 left-0 w-full h-full  bg-opacity-50">
+      <><div className="absolute border-black    top-0 left-0 w-full h-full  bg-opacity-50">
         <div className="absolute top-0 left-0 w-full h-full">
           {Array.from({ length: 100 }, (_, i) => (
             <div
@@ -78,6 +76,7 @@ const CryptoDashboard = () => {
                 width: `${Math.random() * 3 + 1}px`,
                 height: `${Math.random() * 3 + 1}px`,
                 opacity: 0,
+                
                 animationDelay: `${Math.random() * 3}s`,
                 animationDuration: `3s`,
               }} />
@@ -95,13 +94,14 @@ const CryptoDashboard = () => {
         `} </style><Card className="p-10 m-5">
 
           <CardHeader>
-            <CardTitle className="grid items-center gap-10">
-              <DollarSign className="w-5 h-5" />
+            <CardTitle className="grid  text-whiteitems-center gap-10">
+              <DollarSign className="w-5 h-5 text-white" />
+              
               {config.name} ({symbol})
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid border-black grid-cols-2 gap-4 mb-4">
               <div>
                 <p className="text-2xl font-bold">
                   ${typeof stats.price === 'number' ? stats.price.toFixed(2) : stats.price}
@@ -162,17 +162,18 @@ const CryptoDashboard = () => {
 
   return (
     
-    <div className="p-6 max-w-10xl   mx-auto space-x-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl  font-bold">Crypto Networks Dashboard</h1>
-        <button 
-          onClick={fetchCryptoData}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-          >
-          <RefreshCw className="w-4 h-4" />
-          Refresh
-        </button>
-      </div>
+    <div className="p-6 pl-7 max-w-8xl  border-black mx-auto space-x-6">
+    <div className="flex items-center justify-between bg-gray-900 p-6 rounded-lg shadow-lg">
+  <h1 className="text-3xl font-bold text-white">Crypto Networks Dashboard</h1>
+  <button 
+    onClick={fetchCryptoData}
+    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out"
+  >
+    <RefreshCw className="w-4 h-4" />
+    Refresh
+  </button>
+</div>
+
 
       {error && (
         <Alert variant="destructive">
@@ -180,11 +181,12 @@ const CryptoDashboard = () => {
         </Alert>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 text-white border-black bg-black md:grid-cols-2 lg:grid-cols-3 gap-4">
         {Object.keys(cryptoConfigs).map((symbol) => (
           <CryptoCard key={symbol} symbol={symbol} />
         ))}
       </div>
+      <AnimatedFooter/>
     </div>
   );
 };
